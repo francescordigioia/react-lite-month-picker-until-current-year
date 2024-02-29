@@ -2,7 +2,7 @@
 
 ![https://img.shields.io/npm/dw/react-lite-month-picker](https://img.shields.io/npm/dw/react-lite-month-picker) ![npm](https://img.shields.io/npm/v/react-lite-month-picker) ![GitHub top language](https://img.shields.io/github/languages/top/henripar/react-lite-month-picker) ![GitHub](https://img.shields.io/github/license/henripar/react-lite-month-picker)
 
-Simple, modern and customizable month picker component for ReactJS.
+Forked version of the simple, modern and customizable month picker component for ReactJS. This picker only catches the months until the one we're currently in.
 
 ![React Lite Month Picker](https://www.react-lite-month-picker.dev/header-cover.png)
 
@@ -85,6 +85,19 @@ Currently selected month data is an object with the following structure:
 ```
 
 It will get saved on set parent component state with `onChange` event.
+
+Use the following to get have the current month and year as a starting selected month data:
+
+```js
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+
+    const [selectedMonthData, setSelectedMonthData] = useState({
+        monthName: currentMonth,
+        year: currentYear,
+    });
+```
 
 ## Customization
 

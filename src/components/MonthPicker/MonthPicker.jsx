@@ -3,16 +3,22 @@ import { useState } from 'react';
 import styles from './MonthPicker.module.css';
 
 export function MonthPicker(props) {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+
   const [month, setMonth] = useState(
-    props.selected.month ? props.selected.month - 1 : new Date().getMonth()
+    props.selected.month ? props.selected.month - 1 : currentMonth
   );
   const [year, setYear] = useState(
-    props.selected.year ?? new Date().getFullYear()
+    props.selected.year ?? currentYear
   );
 
   const setActiveMonthBgColor = (r, color) => {
     r.style.setProperty('--month-active-bg-color', color);
   };
+
+
 
   useEffect(() => {
     const r = document.querySelector(':root');
@@ -48,11 +54,16 @@ export function MonthPicker(props) {
       month: format,
       timeZone: 'UTC',
     });
-    const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => {
+    let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    // If the selected year is the current year, limit the months
+    if (year === currentYear) {
+      months = months.slice(0, currentMonth + 1);
+    }
+    const monthDates = months.map((month) => {
       const mm = month < 10 ? `0${month}` : month;
       return new Date(`2023-${mm}-01T00:00:00+00:00`);
     });
-    return months.map((date) => formatter.format(date));
+    return monthDates.map((date) => formatter.format(date));
   };
 
   const changeMonth = (month) => {
@@ -101,14 +112,18 @@ export function MonthPicker(props) {
         <span aria-description='Year selected' className={styles.bold1}>
           {year}
         </span>
-        <button aria-label='Next Year' onClick={(e) => changeYear(year + 1)}>
+        <button 
+        aria-label='Next Year' 
+        onClick={(e) => changeYear(year + 1)}
+        disabled={year >= currentYear}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='24'
             height='24'
             viewBox='0 0 24 24'
             fill='none'
-            stroke={props.textColor ? props.textColor : '#000'}
+            stroke={year >= currentYear ? '#FFF' : (props.textColor ? props.textColor : '#000')}
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'
