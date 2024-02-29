@@ -23,7 +23,7 @@
   --input-bg-color: #fff;
   --input-hover-bg-color: #fff;
   --input-text-color: #000;
-  --month-input-font-size: 1.5rem;
+  --month-input-font-size: 14px;
   --month-input-width: 100%;
   --month-input-padding: 1rem;
 }
