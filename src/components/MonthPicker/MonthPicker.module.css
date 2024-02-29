@@ -48,7 +48,7 @@
   position: absolute;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
   background: var(--picker-bg-color);
-  width: var(--month-input-width);
+  width: var(--month-picker-width);
 }
 
 button {
@@ -75,4 +75,5 @@ button {
   --year-display-margin-top: 0;
   --year-display-margin-bottom: 1rem;
   --month-select-padding: 1rem;
+  --month-picker-width: 277px;
 }
