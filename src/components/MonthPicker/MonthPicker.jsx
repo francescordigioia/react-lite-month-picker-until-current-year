@@ -19,6 +19,10 @@ export function MonthPicker(props) {
   };
 
 
+  useEffect(() => {
+    setMonth(props.selected.month ? props.selected.month - 1 : currentMonth);
+    setYear(props.selected.year ?? currentYear);
+  }, [props.selected, currentMonth, currentYear]);
 
   useEffect(() => {
     const r = document.querySelector(':root');
